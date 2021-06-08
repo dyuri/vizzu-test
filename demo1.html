@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vizzu test</title>
+  <style>
+    #vizzu1 {
+      width: 800px;
+      height: 480px;
+    }
+  </style>
+</head>
+<body>
+  <div id="vizzu1"></div>
+
+<script type="module">
+import Vizzu from 'https://vizzuhq.github.io/vizzu-beta-release/0.1.0/vizzu.js';
+import { data } from 'https://vizzuhq.github.io/vizzu-beta-release/example/tutorial-data.js';
+
+window.data = data; // test
+
+const loadHelper = {
+  _loaded: false
+};
+loadHelper.isLoaded = new Promise(res => {
+  loadHelper.loaded = () => {
+    loadHelper._loaded = true;
+    res(chart);
+  };
+});
+
+const chart = new Vizzu("vizzu1", () => { loadHelper.loaded(); });
+
+loadHelper.isLoaded.then(chart => {
+  return chart.animate({
+    data: data,
+    descriptor: {
+      channels: {
+        x: { attach: ['Timeseries'] },
+        y: { attach: ['Values 1'], range: '0,1.1,%' },
+        label: { attach: ['Values 1'] }
+      },
+      title: 'Demo 1',
+      legend: null
+    }
+  });
+}).then(d => {
+  document.addEventListener("click", () => {
+    chart.animate({
+      descriptor: {
+        channels: {
+          y: { attach: ['Categ. Parent'] },
+          color: { attach: ['Categ. Parent'] }
+        },
+        title: 'Demo 2',
+        legend: 'color'
+      }
+    });
+  }, true);
+});
+
+</script>
+</body>
+</html>
