@@ -4,9 +4,9 @@
 
 - npm installable
 - CSV input
-- * consturctor should accept not only `id` (string) but actual HTML element as well
-- * `vizzu-chart` web component
-- * why do you need the init callback? using a promise here (or an option at least) will be much nicer
+- [*] consturctor should accept not only `id` (string) but actual HTML element as well
+- [*] `vizzu-chart` web component
+- [*] why do you need the init callback? using a promise here (or an option at least) will be much nicer
   - especially the `chart` in the callback, it's not explicitly passed to the callback, but visible only due to JS scope
 - CSS variable support for styling (via JS API) (easy dark/light mode switch, or themes)
 
@@ -17,7 +17,7 @@ const styles = window.getComputedStyle(el);
 styles.getPropertyValue("--plot-marker-label-position"); // style: { plot: { marker: { label: { position: "whatever"}}}}
 ```
 
-- * `chart.animate` returns a promise (which is fine) that resolves to `undefined`, it should resolves to the `chart` object itself, to make it easily chainable without relying on the global scope/namespace
+- [*] `chart.animate` returns a promise (which is fine) that resolves to `undefined`, it should resolves to the `chart` object itself, to make it easily chainable without relying on the global scope/namespace
 - for me `data` is kind of turned inside out, in my head I have data points with properties, and not list of properties with a list of values that are related to eachother (this is also the case for simple CSV => JSON mapping)
 
 ```javascript
